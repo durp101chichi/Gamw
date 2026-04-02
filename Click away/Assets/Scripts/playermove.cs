@@ -1,11 +1,14 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using System.Collections;
 
 public class playermove : MonoBehaviour
 {
     [SerializeField]float speed = 10f;
     [SerializeField]float jumpforce = 10f;
-    bool isJUmping = false;
+    [SerializeField] float dashForce = 2000f;
+    bool isGrounded;
+    bool canDash = true;
     Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,29 +26,84 @@ public class playermove : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
         rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
-        if (Input.GetButtonDown("Jump") &&  !isJUmping)
+
+        Jump();
+        Dash();
+    }
+    public void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            isJUmping=true;
+            
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
+
         }
-        Application.Quit();
+    }
+    
+    public void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
+        {
+           
+            StartCoroutine(DashCooldownLeft());
+        }
+       // if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash)
+        //{
+        //    StartCoroutine(DashCooldownRight());
+       // }
+    }
+    IEnumerator DashCooldownLeft()
+    {
+        canDash = false;
+
+        rb.AddForce(Vector3.left * dashForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(6f);
+
+        canDash = true;
+    }
+    IEnumerator DashCooldownRight()
+    {
+        canDash = false;
+
+        rb.AddForce(Vector3.right * dashForce, ForceMode.VelocityChange);
+
+        yield return new WaitForSeconds(6f);
+
+        canDash = true;
     }
 
-   //private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
     //{
-        
-     //   if (collision.gameObject.CompareTag("Ground"))
-     //   {
-      //      isJUmping=false;
-      //      Application.Quit();
-       //     Debug.Log("touch the object!!!!");
-      //      Application.Quit();
+
+    //   if (collision.gameObject.CompareTag("Ground"))
+    //   {
+    //      isJUmping=false;
+    //      Application.Quit();
+    //     Debug.Log("touch the object!!!!");
+    //      Application.Quit();
 #if UNITY_EDITOR
-        //    UnityEditor.EditorApplication.isPlaying = false;
+    //    UnityEditor.EditorApplication.isPlaying = false;
 #endif
-       // }
+    // }
 
 
-   // }
+    // }
 
 }
