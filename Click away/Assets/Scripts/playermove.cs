@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using System.Collections;
 
-public class playermove : MonoBehaviour
+public class Playermove : MonoBehaviour
 {
     [SerializeField]float speed = 10f;
     [SerializeField]float jumpforce = 10f;
@@ -10,22 +10,24 @@ public class playermove : MonoBehaviour
     bool isGrounded;
     bool canDash = true;
     Rigidbody rb;
+    Animation AnimationController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Application.Quit();
+        
+        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vetical = Input.GetAxis("Vertical");
 
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
-        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+        rb.linearVelocity = new Vector3(movement.x * speed, 0, movement.z * speed);
 
         Jump();
         Dash();
@@ -52,7 +54,7 @@ public class playermove : MonoBehaviour
         //    StartCoroutine(DashCooldownRight());
        // }
     }
-    IEnumerator DashCooldownLeft()
+    private IEnumerator DashCooldownLeft()
     {
         canDash = false;
 
