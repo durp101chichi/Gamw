@@ -27,20 +27,28 @@ public class Playermove : MonoBehaviour
 
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
-        rb.linearVelocity = new Vector3(movement.x * speed, 0, movement.z * speed);
+        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
 
         Jump();
         Dash();
+  //    Dive();
     }
     public void Jump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
+
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 
         }
     }
+ // public void Dive()
+ // {
+   //   if (Input.GetKeyDown(KeyCode.LeftAlt) && !isGrounded)
+   //   {
+   //       rb.AddForce(Vector3.down * jumpforce, ForceMode.VelocityChange);
+   //   }
+//  }
     
     public void Dash()
     {
