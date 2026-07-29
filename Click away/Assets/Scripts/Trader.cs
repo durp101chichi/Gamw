@@ -30,7 +30,7 @@ public class Trader : MonoBehaviour
         {
             SwitchColor();
         }
-        if(Input.GetKeyUp(KeyCode.E))
+        if(Input.GetKeyUp(KeyCode.E) && _uiTraderMenu != null)
         {
             isAnimating = true;
             StartCoroutine(Smooth(0));
