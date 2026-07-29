@@ -7,6 +7,7 @@ public class Playermove : MonoBehaviour
     [SerializeField]float speed = 10f;
     [SerializeField]float jumpforce = 10f;
     [SerializeField] float dashForce = 2000f;
+    [SerializeField] float rotationSpeed;
     bool isGrounded;
     bool canDash = true;
     Rigidbody rb;
@@ -28,6 +29,14 @@ public class Playermove : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
         rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+
+
+
+        if (movement != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
 
         Jump();
         Dash();

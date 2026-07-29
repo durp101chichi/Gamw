@@ -3,6 +3,7 @@ using UnityEngine;
 public class LightController : MonoBehaviour
 {
     [SerializeField] private Light Light;
+    [SerializeField] private GameObject lighting;
     private bool isActive = true;
     void Start()
     {
@@ -26,14 +27,16 @@ public class LightController : MonoBehaviour
             
             if (isActive) 
             {
-                Light.intensity = 1000;
+                Light.intensity = 100;
                 isActive = false;
+                lighting.SetActive(true);
             }
 
             else
             {
                 isActive = true;
                 Light.intensity = 0;
+                lighting.SetActive(false);
             }
             
         }

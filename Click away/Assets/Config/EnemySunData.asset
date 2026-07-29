@@ -15,4 +15,4 @@ MonoBehaviour:
   sunspeed: 2
   duration: 1000000
   target: {fileID: 0}
-  hp: -10
+  hp: 5520

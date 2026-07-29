@@ -1,21 +1,43 @@
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerDamage : MonoBehaviour
 {
-    [SerializeField] public int hp;
+    [SerializeField] public float hp;
+    [SerializeField] public float maxHp;
     [SerializeField] public TextMeshProUGUI textMeshPro;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] public Slider Slider;
+    [SerializeField] private GameObject bloodImage;
+    [SerializeField] private GameObject bloodImage1;
+   
     void Start()
     {
-        
+        Slider.maxValue = maxHp;
+        Slider.value = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (hp < 50)
+        {
+            bloodImage.SetActive(true);
+            bloodImage1.SetActive(false);
+        }
+        if (hp > 50 && hp < 80)
+        {
+            bloodImage.SetActive(false);
+            bloodImage1.SetActive(true);
+        }
+        if (hp > 80)
+        {
+            bloodImage1.SetActive(false);
+            bloodImage.SetActive(false);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -23,21 +45,13 @@ public class PlayerDamage : MonoBehaviour
         {
             Debug.Log("hit");
             hp -= 20;
-            textMeshPro.text = $"Hp: {hp}";
+            Slider.value = hp;
+            textMeshPro.text = $" {hp}";
         }
 
         // Or access the impact velocity
         
     }
-    private void Damage()
-    {
-        
-    }
-   // private void OnTriggerEnter(Collider other)
-  //  {
-     //   if (other.CompareTag("Enemy"))
-    //    {
-     //       hp = 200 - 10;
-      //  }
-   // }
+   
+  
 }
