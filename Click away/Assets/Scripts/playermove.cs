@@ -2,23 +2,26 @@ using JetBrains.Annotations;
 using UnityEngine;
 using System.Collections;
 
-public class playermove : MonoBehaviour
+public class Playermove : MonoBehaviour
 {
     [SerializeField]float speed = 10f;
     [SerializeField]float jumpforce = 10f;
     [SerializeField] float dashForce = 2000f;
+    [SerializeField] float rotationSpeed;
     bool isGrounded;
     bool canDash = true;
     Rigidbody rb;
+    Animation AnimationController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Application.Quit();
+        
+        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vetical = Input.GetAxis("Vertical");
@@ -27,18 +30,34 @@ public class playermove : MonoBehaviour
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
         rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
 
+
+
+        if (movement != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+
         Jump();
         Dash();
+  //    Dive();
     }
     public void Jump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.VelocityChange);
+
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
 
         }
     }
+ // public void Dive()
+ // {
+   //   if (Input.GetKeyDown(KeyCode.LeftAlt) && !isGrounded)
+   //   {
+   //       rb.AddForce(Vector3.down * jumpforce, ForceMode.VelocityChange);
+   //   }
+//  }
     
     public void Dash()
     {
@@ -52,7 +71,7 @@ public class playermove : MonoBehaviour
         //    StartCoroutine(DashCooldownRight());
        // }
     }
-    IEnumerator DashCooldownLeft()
+    private IEnumerator DashCooldownLeft()
     {
         canDash = false;
 
