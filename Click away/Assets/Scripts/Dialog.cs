@@ -1,25 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Drawing;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-
 public class Dialog : MonoBehaviour
 {
     [SerializeField] private dialogelements[] dialog;
     [SerializeField] private float textSpeed;
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private TextMeshProUGUI CharacterName;
-    [SerializeField] private RawImage characterImage;
+    [SerializeField] private Animator characterAnimator;
     [SerializeField] private AudioSource audioSource;
     private int index;
-    private Texture profile;
 
     void StartYap()
     {
-        profile = characterImage.texture;
         textComponent.text = string.Empty;
         StartDialog();
 
@@ -45,7 +38,7 @@ public class Dialog : MonoBehaviour
         index = 0;
         StartCoroutine(TypeLine());
         CharacterName.text = dialog[index].characterName;
-        characterImage.texture = dialog[index].characterImage.texture;
+        characterAnimator.runtimeAnimatorController = dialog[index].characterGif;
     }
 
     IEnumerator TypeLine()
@@ -66,7 +59,7 @@ public class Dialog : MonoBehaviour
             index++;
             textComponent.text = string.Empty;
             CharacterName.text = dialog[index].characterName;
-            characterImage.texture = dialog[index].characterImage.texture;
+            characterAnimator.runtimeAnimatorController = dialog[index].characterGif;
             StartCoroutine(TypeLine());
         }
         else
