@@ -13,10 +13,11 @@ public class Dialog : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textComponent;
     [SerializeField] private TextMeshProUGUI CharacterName;
     [SerializeField] private RawImage characterImage;
+    [SerializeField] private AudioSource audioSource;
     private int index;
     private Texture profile;
 
-    void Start()
+    void StartYap()
     {
         profile = characterImage.texture;
         textComponent.text = string.Empty;
@@ -52,6 +53,8 @@ public class Dialog : MonoBehaviour
         foreach (char c in dialog[index].talk.ToCharArray())
         {
             textComponent.text += c;
+            audioSource.pitch = Random.Range(0.2f, 1.8f);
+            audioSource.PlayOneShot(dialog[index].characterVoice);
             yield return new WaitForSeconds(textSpeed);
         }
     }
