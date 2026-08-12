@@ -15,4 +15,6 @@ public class TraderConfig : ScriptableObject
 
     public List<float> leftAlphas;
     public List<float> rightAlphas;
+
+
 }

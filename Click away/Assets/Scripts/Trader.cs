@@ -14,32 +14,43 @@ public class Trader : MonoBehaviour
     [SerializeField] TraderConfig config;
     [SerializeField] PlayerData playerData;
     [SerializeField] public GameObject _uiTraderMenu;
-    [SerializeField] private TextMeshProUGUI ticketText;
+    [SerializeField] public TextMeshProUGUI ticketText;
     [SerializeField] public TextMeshProUGUI animationText;
+    [SerializeField] private GameObject moneyImage;
 
-    private bool isAnimating = false;
+    public bool isTraderAnimating = false;
     private void Start()
     {
+        ticketText.text = $"{config.ticketAmmount}";
         config.ticketAmmount = 0;
         config.leftAlphas = new float[animationText.text.Length].ToList();
         config.rightAlphas = new float[animationText.text.Length].ToList();
+        
     }
     private void Update()
     {
-        if (isAnimating)
-        {
-            SwitchColor();
-        }
-        if(Input.GetKeyUp(KeyCode.E) && _uiTraderMenu != null)
-        {
-            isAnimating = true;
-            StartCoroutine(Smooth(0));
-        }
+
+        MoneyImage();
+        TextAnimator1();
         if (Input.GetKeyUp(KeyCode.End))
         {
-            isAnimating = false;
+            isTraderAnimating = false;
             Visible(true);
         }
+    }
+    public void TextAnimator1()
+    {
+
+        if (isTraderAnimating)
+        {
+            SwitchColor();
+            
+            StartCoroutine(Smooth(0));
+        }
+        
+        
+           
+        
     }
     private void Visible(bool visible)
     {
@@ -117,14 +128,22 @@ public class Trader : MonoBehaviour
         {
             config.ticketAmmount -= 0;
             ticketText.text = $"{config.ticketAmmount}";            
-        }
-        
-          
-        
+        }      
     }
-    public void ExtraTask()
+    public void RefreshTicket()
     {
-
+        ticketText.text = $"{config.ticketAmmount}";
+    }
+    public void MoneyImage()
+    {
+        if (playerData.money <= 0)
+        {
+            moneyImage.SetActive(false );
+        }
+        else
+        {
+            moneyImage.SetActive(true);
+        }
     }
 
 

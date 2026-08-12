@@ -2,21 +2,28 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using static UnityEngine.Rendering.STP;
 
 public class TraderScript : MonoBehaviour
 {
     
     private bool playerInRange = false;
     [SerializeField] TraderConfig TraderConfig;
+    [SerializeField] PlayerData PlayerData;
     [SerializeField] public GameObject _uitaskpanel;
     [SerializeField] public GameObject _uiTraderMenu;
     [SerializeField] public Trader TraderScript1;
+    
 
     private void Update()
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
         {
+            TraderScript1.isTraderAnimating = true;
             _uiTraderMenu.SetActive(true);
+            _uitaskpanel.SetActive(false);
+
+            TraderScript1.ticketText.text = $"{TraderConfig.ticketAmmount}";
         }
     }
 
@@ -26,10 +33,16 @@ public class TraderScript : MonoBehaviour
         {
             playerInRange = true;
             _uitaskpanel.SetActive(true);
+            
+            
+            TraderScript1.ticketText.text = $"{TraderConfig.ticketAmmount}";
         }
     }
-   
-    
+    public void RefreshButton()
+    {
+        
+    }
+
     private void Opener()
     {
         
@@ -37,7 +50,7 @@ public class TraderScript : MonoBehaviour
         {
            _uiTraderMenu.SetActive(true);
         }
-        Debug.Log("Dad");
+        
     }
     private void OnTriggerExit(Collider other)
     {
@@ -46,7 +59,7 @@ public class TraderScript : MonoBehaviour
             playerInRange = false;
             _uitaskpanel.SetActive(false);
             _uiTraderMenu.SetActive(false);
-            TraderScript1.animationText.alpha = 0.1f;
+            TraderScript1.ticketText.text =  $"{TraderConfig.ticketAmmount}";
 
         }
     }

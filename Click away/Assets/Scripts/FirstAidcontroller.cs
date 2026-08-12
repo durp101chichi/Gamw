@@ -10,14 +10,14 @@ public class FirstAidcontroller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (playerDamage.hp >= 200)
+            if (playerDamage.hp >= playerDamage.maxHp) 
             {
-                playerDamage.hp = 200;
+                _giveHp = 0;
             }
             playerDamage.hp += _giveHp;
             playerDamage.Slider.value = playerDamage.hp;
             
-            playerDamage.textMeshPro.text = $" {playerDamage.hp}";
+            playerDamage.hpText.text = $" {playerDamage.hp}";
 
             Destroy(gameObject);
         }

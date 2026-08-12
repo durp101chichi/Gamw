@@ -9,7 +9,7 @@ public class PlayerDamage : MonoBehaviour
 {
     [SerializeField] public float hp;
     [SerializeField] public float maxHp;
-    [SerializeField] public TextMeshProUGUI textMeshPro;
+    [SerializeField] public TextMeshProUGUI hpText;
     [SerializeField] public Slider Slider;
     [SerializeField] private GameObject bloodImage;
     [SerializeField] private GameObject bloodImage1;
@@ -18,6 +18,7 @@ public class PlayerDamage : MonoBehaviour
     {
         Slider.maxValue = maxHp;
         Slider.value = hp;
+        hpText.text = $" {hp}";
     }
 
     // Update is called once per frame
@@ -46,7 +47,7 @@ public class PlayerDamage : MonoBehaviour
             Debug.Log("hit");
             hp -= 20;
             Slider.value = hp;
-            textMeshPro.text = $" {hp}";
+            hpText.text = $" {hp}";
         }
 
         // Or access the impact velocity
