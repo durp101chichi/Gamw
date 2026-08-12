@@ -11,7 +11,7 @@ public class Dialog : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     private int index;
 
-    void StartYap()
+    void Start()
     {
         textComponent.text = string.Empty;
         StartDialog();

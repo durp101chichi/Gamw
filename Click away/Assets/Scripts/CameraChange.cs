@@ -9,6 +9,7 @@ public class CameraChange : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             camera1.enabled = true;
+            Debug.Log("Camera 1 enabled");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -16,6 +17,7 @@ public class CameraChange : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             camera1.enabled = false;
+            Debug.Log("Camera 1 disabled");
         }
     }
 }

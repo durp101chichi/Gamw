@@ -42,6 +42,14 @@ public class Playermove : MonoBehaviour
         Dash();
   //    Dive();
     }
+
+    private void FixedUpdate()
+    {
+        if (DialogueManager.GetInstance().dialogueIsPlaying)
+        {
+            return;
+        }
+    }
     public void Jump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
