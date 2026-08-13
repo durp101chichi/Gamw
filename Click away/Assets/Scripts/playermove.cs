@@ -8,16 +8,17 @@ public class Playermove : MonoBehaviour
     [SerializeField]float jumpforce = 10f;
     [SerializeField] float dashForce = 2000f;
     [SerializeField] float rotationSpeed;
+    [SerializeField] DialogueManager dialogueManager;
     bool isGrounded;
     bool canDash = true;
     Rigidbody rb;
-    Animation AnimationController;
+    Animator animationController;
+    float idleTime = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        
+        animationController = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,7 +29,11 @@ public class Playermove : MonoBehaviour
 
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
-        rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+
+        if (dialogueManager.dialogueIsPlaying)
+            rb.linearVelocity = Vector3.zero;
+        else 
+            rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
 
 
 
@@ -36,36 +41,42 @@ public class Playermove : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            idleTime = 0;
+            animationController.SetBool("walking", true);
         }
+        else
+        {
+            idleTime += Time.deltaTime;
+            animationController.SetBool("walking", false);
+        }
+        animationController.SetInteger("idleTime", (int)idleTime);
+
 
         Jump();
         Dash();
-  //    Dive();
+     //   Dive();
     }
 
-    private void FixedUpdate()
-    {
-        if (DialogueManager.GetInstance().dialogueIsPlaying)
-        {
-            return;
-        }
-    }
     public void Jump()
     {
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
 
             rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-
+            animationController.SetTrigger("jump");
+        }
+        else
+        {
+            animationController.ResetTrigger("jump");
         }
     }
- // public void Dive()
- // {
-   //   if (Input.GetKeyDown(KeyCode.LeftAlt) && !isGrounded)
-   //   {
-   //       rb.AddForce(Vector3.down * jumpforce, ForceMode.VelocityChange);
-   //   }
-//  }
+  //public void Dive()
+  //{
+  //    if (Input.GetKeyDown(KeyCode.LeftShift) && !isGrounded)
+  //    {
+  //       rb.AddForce(Vector3.down * jumpforce, ForceMode.VelocityChange);
+  //    }
+  //}
     
     public void Dash()
     {
@@ -74,10 +85,10 @@ public class Playermove : MonoBehaviour
            
             StartCoroutine(DashCooldownLeft());
         }
-       // if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash)
-        //{
-        //    StartCoroutine(DashCooldownRight());
-       // }
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash)
+        {
+            StartCoroutine(DashCooldownRight());
+        }
     }
     private IEnumerator DashCooldownLeft()
     {
@@ -115,6 +126,9 @@ public class Playermove : MonoBehaviour
             isGrounded = false;
         }
     }
+
+
+
 
     //private void OnCollisionEnter(Collision collision)
     //{
