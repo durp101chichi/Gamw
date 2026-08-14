@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private int sceneEnd; 
 
     [Header("Load Globals JSON")]
     [SerializeField] private TextAsset loadGlobalsJSON;
@@ -31,10 +32,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
     [SerializeField] private DialogueAudioInfoSO[] audioInfos;
     [SerializeField] private bool makePredictable;
+
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
 
+    private SceneChange sceneChange;
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
 
@@ -74,6 +77,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        sceneChange = GetComponent<SceneChange>();
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogCamera.enabled = false;
@@ -161,6 +165,11 @@ public class DialogueManager : MonoBehaviour
         dialogCamera.enabled = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        if (sceneEnd >= 0)
+        {
+            sceneChange.ChangeScene(sceneEnd);
+        }
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
