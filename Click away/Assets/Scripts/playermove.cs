@@ -62,6 +62,7 @@ public class Playermove : MonoBehaviour
         animationController.SetInteger("idleTime", (int)idleTime);
 
 
+        HandleWallSliding();
         Jump();
         Dash();
      //   Dive();
@@ -74,22 +75,19 @@ public class Playermove : MonoBehaviour
             if (isGrounded)
             {
                 rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-                animationController.SetTrigger("jump");
-            }
-            else
-            {
-                animationController.ResetTrigger("jump");
+                animationController.SetBool("jump", true);
             }
 
             if (wall)
             {
                 TriggerWallJump();
-                animationController.SetTrigger("running");
+                animationController.SetBool("running", true);
             }
-            else
-            {
-                animationController.ResetTrigger("running");
-            }
+        }
+        else
+        {
+            animationController.SetBool("running", false);
+            animationController.SetBool("jump", false);
         }
     }
   //public void Dive()
@@ -102,35 +100,25 @@ public class Playermove : MonoBehaviour
     
     public void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl) && canDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
-           
-            StartCoroutine(DashCooldownLeft());
-        }
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && canDash)
-        {
-            StartCoroutine(DashCooldownRight());
+            StartCoroutine(DashCooldown());
         }
     }
-    private IEnumerator DashCooldownLeft()
+    private IEnumerator DashCooldown()
     {
         canDash = false;
+        animationController.SetTrigger("dash");
 
-        rb.AddForce(Vector3.left * dashForce, ForceMode.VelocityChange);
+        if (horizontal >= 0)
+            rb.AddForce(Vector3.right * dashForce, ForceMode.VelocityChange);
+        else if (horizontal < 0)
+            rb.AddForce(Vector3.left * dashForce, ForceMode.VelocityChange);
 
         yield return new WaitForSeconds(.5f);
 
         canDash = true;
-    }
-    IEnumerator DashCooldownRight()
-    {
-        canDash = false;
-
-        rb.AddForce(Vector3.right * dashForce, ForceMode.VelocityChange);
-
-        yield return new WaitForSeconds(.5f);
-
-        canDash = true;
+        animationController.ResetTrigger("dash");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -154,9 +142,9 @@ public class Playermove : MonoBehaviour
         isWallJumping = true;
         isWallRunning = false;
 
-        directionalInput = isFacingRight ? -1f : 1f;
+        directionalInput = isFacingRight ? 1f : -1f;
 
-        rb.linearVelocity = new Vector3(directionalInput * sideJumpForce.x, sideJumpForce.y);
+        rb.linearVelocity = new Vector3(sideJumpForce.x, sideJumpForce.y);
 
         if ((directionalInput > 0 && !isFacingRight) || (directionalInput < 0 && isFacingRight))
         {
