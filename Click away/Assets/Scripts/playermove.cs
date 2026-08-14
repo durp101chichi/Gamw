@@ -9,7 +9,17 @@ public class Playermove : MonoBehaviour
     [SerializeField] float dashForce = 2000f;
     [SerializeField] float rotationSpeed;
     [SerializeField] DialogueManager dialogueManager;
+    [SerializeField] float wallSlideSpeed = 2f;
+    [SerializeField] float wallRunDuration = .5f;
+    [SerializeField] Vector2 sideJumpForce = new Vector2(10f, 10f);
+
+    float directionalInput;
+    float horizontal;
     bool isGrounded;
+    bool wall;
+    bool isFacingRight = true;
+    bool isWallRunning;
+    bool isWallJumping;
     bool canDash = true;
     Rigidbody rb;
     Animator animationController;
@@ -24,7 +34,7 @@ public class Playermove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        horizontal = Input.GetAxis("Horizontal");
         float vetical = Input.GetAxis("Vertical");
 
 
@@ -59,15 +69,27 @@ public class Playermove : MonoBehaviour
 
     public void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump"))
         {
+            if (isGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+                animationController.SetTrigger("jump");
+            }
+            else
+            {
+                animationController.ResetTrigger("jump");
+            }
 
-            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
-            animationController.SetTrigger("jump");
-        }
-        else
-        {
-            animationController.ResetTrigger("jump");
+            if (wall)
+            {
+                TriggerWallJump();
+                animationController.SetTrigger("running");
+            }
+            else
+            {
+                animationController.ResetTrigger("running");
+            }
         }
     }
   //public void Dive()
@@ -96,7 +118,7 @@ public class Playermove : MonoBehaviour
 
         rb.AddForce(Vector3.left * dashForce, ForceMode.VelocityChange);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(.5f);
 
         canDash = true;
     }
@@ -106,7 +128,7 @@ public class Playermove : MonoBehaviour
 
         rb.AddForce(Vector3.right * dashForce, ForceMode.VelocityChange);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(.5f);
 
         canDash = true;
     }
@@ -114,22 +136,57 @@ public class Playermove : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
-        {
             isGrounded = true;
-        }
+        if (collision.gameObject.CompareTag("Wall"))
+            wall = true;
     }
 
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
-        {
             isGrounded = false;
+        if (collision.gameObject.CompareTag("Wall"))
+            wall = false;
+    }
+
+    private void TriggerWallJump()
+    {
+        isWallJumping = true;
+        isWallRunning = false;
+
+        directionalInput = isFacingRight ? -1f : 1f;
+
+        rb.linearVelocity = new Vector3(directionalInput * sideJumpForce.x, sideJumpForce.y);
+
+        if ((directionalInput > 0 && !isFacingRight) || (directionalInput < 0 && isFacingRight))
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
+
+        Invoke(nameof(StopWallJumping), wallRunDuration);
+    }
+
+    private void HandleWallSliding()
+    {
+        // Slide if touching a wall in mid-air while pressing toward it
+        if (wall && !isGrounded && horizontal != 0f)
+        {
+            isWallRunning = true;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlideSpeed, float.MaxValue));
+        }
+        else
+        {
+            isWallRunning = false;
         }
     }
 
-
-
-
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
+    }
     //private void OnCollisionEnter(Collision collision)
     //{
 
