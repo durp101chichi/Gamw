@@ -19,7 +19,7 @@ public class ShopPanelOpener : MonoBehaviour
         if (inRange && Input.GetKeyDown(KeyCode.E))
         {
             shopTextAnimator.isAnimating = true;
-            playerDamage.hpText.text = $"";
+          //  playerDamage.hpText.text = $"";
             shopPanel.SetActive(true);
             askPanel.SetActive(false);
             
@@ -40,13 +40,13 @@ public class ShopPanelOpener : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         inRange = false;
-        playerDamage.hpText.text = $" {playerDamage.hp}";
+       // playerDamage.hpText.text = $" {playerDamage.hp}";
         askPanel.SetActive(false);
         shopPanel.SetActive(false );
     }
     public void ExitButton()
     {
-        playerDamage.hpText.text = $" {playerDamage.hp}";
+       // playerDamage.hpText.text = $" {playerDamage.hp}";
         shopPanel.SetActive(false);
     }
 
