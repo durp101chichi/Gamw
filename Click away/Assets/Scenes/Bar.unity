@@ -437,6 +437,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &240243378 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2194944967649793151, guid: 47c91a0d0baa2db4d83079019904c501, type: 3}
+  m_PrefabInstance: {fileID: 1819702191}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &293142224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5166075222763053459, guid: 47c91a0d0baa2db4d83079019904c501, type: 3}
+  m_PrefabInstance: {fileID: 1819702191}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &451124922
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +460,6 @@ GameObject:
   - component: {fileID: 451124926}
   - component: {fileID: 451124925}
   - component: {fileID: 451124924}
-  - component: {fileID: 451124923}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -458,23 +467,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &451124923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451124922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9572e554b9988384e998d95851d63808, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Trader
-  config: {fileID: 11400000, guid: a2ee2121cb1956d458d0189261f83e07, type: 2}
-  playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
-  _uiTraderMenu: {fileID: 0}
-  ticketText: {fileID: 0}
-  animationText: {fileID: 0}
 --- !u!65 &451124924
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -591,16 +583,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &240243378 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2194944967649793151, guid: 47c91a0d0baa2db4d83079019904c501, type: 3}
-  m_PrefabInstance: {fileID: 1819702191}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &293142224 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5166075222763053459, guid: 47c91a0d0baa2db4d83079019904c501, type: 3}
-  m_PrefabInstance: {fileID: 1819702191}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &461354727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,3 +1960,4 @@ SceneRoots:
   - {fileID: 1704024753}
   - {fileID: 1370755167}
   - {fileID: 451124928}
+  - {fileID: 1245298613}
