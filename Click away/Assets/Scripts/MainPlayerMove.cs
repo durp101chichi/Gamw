@@ -14,14 +14,14 @@ public class MainPlayerMove : MonoBehaviour
     Rigidbody rb;
     Animator animationController;
     float idleTime = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+   
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animationController = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+   
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");

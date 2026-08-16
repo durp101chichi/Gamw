@@ -788,6 +788,10 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
       propertyPath: m_Controller
       value: 
+      objectReference: {fileID: 9100000, guid: 92d68056be9f9324fae6de2ef914cec8, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -822,7 +826,7 @@ PrefabInstance:
       addedObject: {fileID: 531700397}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 531700385}
+      addedObject: {fileID: 531700398}
   m_SourcePrefab: {fileID: 100100000, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
 --- !u!4 &72682653 stripped
 Transform:
@@ -4014,22 +4018,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &531700385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 531700383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7006a7991ec33664880af162d4c7b48c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::playermove
-  speed: 5
-  jumpforce: 50
-  dashForce: 100
-  rotationSpeed: 20
 --- !u!4 &531700387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
@@ -4145,6 +4133,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
   playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
   moneyCounterText: {fileID: 630971402}
+--- !u!114 &531700398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531700383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 820fd3c758dff664195252b72a8d5e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainPlayerMove
+  speed: 10
+  jumpforce: 10
+  dashForce: 2000
+  rotationSpeed: 20
 --- !u!4 &534191412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2819944225396695664, guid: f65ac0e5ca9e1f245bb1dc2e66e8020e, type: 3}
