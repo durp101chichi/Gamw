@@ -788,7 +788,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9100000, guid: 92d68056be9f9324fae6de2ef914cec8, type: 2}
     - target: {fileID: 5866666021909216657, guid: 3caa371388b186b46a3613c83469dae8, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -4039,7 +4039,7 @@ CapsuleCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.276089
