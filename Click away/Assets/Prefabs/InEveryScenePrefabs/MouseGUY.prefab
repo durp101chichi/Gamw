@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Playermove
   speed: 5
-  jumpforce: 3
+  jumpforce: 5
   dashForce: 100
   rotationSpeed: 20
   dialogueManager: {fileID: 0}
   wallSlideSpeed: 2
   wallRunDuration: 0.5
-  sideJumpForce: {x: 10, y: 10}
+  sideJumpForce: {x: 10, y: 5}
 --- !u!54 &3989360971741617761
 Rigidbody:
   m_ObjectHideFlags: 0
