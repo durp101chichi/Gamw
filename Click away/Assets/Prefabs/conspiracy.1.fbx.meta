@@ -12,11 +12,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Soccer Ball (PBR)
-    second: {fileID: 2100000, guid: 907c8ac295308a543b02b01e144f5725, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: conspiracy1_backround
     second: {fileID: 2100000, guid: 20acdb1e73a7ad946ba0c1e6bf9bb571, type: 2}
   - first:
