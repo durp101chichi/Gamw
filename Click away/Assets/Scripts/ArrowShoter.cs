@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class ArrowShoter : MonoBehaviour
 {
-    public GameObject pijlPrefab;    
-    public Transform schietPunt;     
+    public GameObject pijlPrefab;    //arrowprefab
+    public Transform schietPunt;     //shootpoint
     public float pijlSnelheid = 20f;
     [SerializeField] int ammountOfShoot;
     [SerializeField] TextMeshProUGUI arrowCounter;
+    [SerializeField] AkController akController;
+    [SerializeField] HasAk hasAk;
+    
     [Header("Scroll Instellingen")]
 
-    public float scrollGevoeligheid = 1f;
-    public float minimaleSnelheid = 10f;   
-    public float maximaleSnelheid = 60f;
+    public float scrollGevoeligheid = 1f; //scroolsens
+    public float minimaleSnelheid = 10f;   //minspeed
+    public float maximaleSnelheid = 60f; //maxspeed
 
     private void Start()
     {
@@ -28,7 +31,7 @@ public class ArrowShoter : MonoBehaviour
         {
             PasSnelheidAan(scroll);
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !hasAk.hasAk)
         {
             
             
@@ -45,42 +48,47 @@ public class ArrowShoter : MonoBehaviour
     }
     void PasSnelheidAan(float scrollRichting)
     {
-        // Verander de snelheid op basis van de scroll-richting en gevoeligheid
+       
         pijlSnelheid += scrollRichting * scrollGevoeligheid;
 
-        // Mathf.Clamp zorgt ervoor dat de snelheid netjes tussen het minimum en maximum blijft
+        
         pijlSnelheid = Mathf.Clamp(pijlSnelheid, minimaleSnelheid, maximaleSnelheid);
 
         Debug.Log("Huidige pijlsnelheid ingesteld op: " + pijlSnelheid);
     }
     void SchietPijlNaarMuis()
     {
-        
+
         GameObject nieuwePijl = Instantiate(pijlPrefab, schietPunt.position, schietPunt.rotation);
         Rigidbody rb = nieuwePijl.GetComponent<Rigidbody>();
 
         if (rb != null)
         {
-            
-            Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
-
            
-            Vector3 vliegRichting = transform.forward;
+            Plane speelvlak = new Plane(Vector3.forward, schietPunt.position);
+            Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            
-            if (Physics.Raycast(straal, out hitInfo))
+            Vector3 vliegRichting = transform.forward;
+            float afstand;
+
+            // 2. Bepaal waar de muis het 2D-vlak snijdt
+            if (speelvlak.Raycast(straal, out afstand))
             {
+                Vector3 muisOpVlak = straal.GetPoint(afstand);
+
                 
-                vliegRichting = (hitInfo.point - schietPunt.position).normalized;
+                vliegRichting = muisOpVlak - schietPunt.position;
+                vliegRichting.z = 0f; 
+                vliegRichting.Normalize(); 
             }
 
-            // 5. Laat de pijl in die richting vliegen
+           
             rb.linearVelocity = vliegRichting * pijlSnelheid;
 
-            
-            nieuwePijl.transform.forward = vliegRichting;
-            
+            if (vliegRichting != Vector3.zero)
+            {
+                nieuwePijl.transform.forward = vliegRichting;
+            }
         }
     }
 }

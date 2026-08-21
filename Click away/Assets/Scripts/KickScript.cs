@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class KickScript : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    Animator animator;
+    private void Update()
     {
-        
+        animator = GetComponent<Animator>();
+        Kick();
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Kick()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            animator.SetTrigger("kick");
+        }
+        else
+        {
+            animator.ResetTrigger("kick");
+        }
         
     }
 }
