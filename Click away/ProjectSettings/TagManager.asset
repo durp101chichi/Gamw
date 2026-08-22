@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Enemy
   - Trader
+  - FxTemporaire
+  - ak
   layers:
   - Default
   - TransparentFX

@@ -5,11 +5,12 @@ public class AkController : MonoBehaviour
 {
     public GameObject pijlPrefab;    //arrowprefab
     public Transform schietPunt;     //shootpoint
-    public float pijlSnelheid = 20f;
+    
     public ParticleSystem smoke;
     [SerializeField] int ammo;
     [SerializeField] TextMeshProUGUI bulletcounter;
     [SerializeField] HasAk HasAk;
+    [SerializeField] PlayerData playerData;
 
 
     private void Start()
@@ -19,7 +20,8 @@ public class AkController : MonoBehaviour
     void Update()
     {
       DraaiNaarMuis();
-
+        DropAk();
+       
 
 
         if (Input.GetMouseButtonDown(0))
@@ -45,25 +47,25 @@ public class AkController : MonoBehaviour
         if (rb != null)
         {
             
-            Plane speelvlak = new Plane(Vector3.forward, schietPunt.position);
-            Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
+           // Plane speelvlak = new Plane(Vector3.forward, schietPunt.position);
+          //  Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             
-            float afstand;
-            Vector3 vliegRichting = transform.forward;
+          //  float afstand;
+            Vector3 vliegRichting = -transform.forward;
 
-            if (speelvlak.Raycast(straal, out afstand))
+           // if (speelvlak.Raycast(straal, out afstand))
             {
-                Vector3 muisOpVlak = straal.GetPoint(afstand);
+           //     Vector3 muisOpVlak = straal.GetPoint(afstand);
 
-                
-                vliegRichting = muisOpVlak - schietPunt.position;
-                vliegRichting.z = 0f; 
-                vliegRichting.Normalize(); 
+               
+           //     vliegRichting = muisOpVlak - schietPunt.position;
+           //     vliegRichting.z = 0f; 
+           //     vliegRichting.Normalize(); 
             }
 
-            
-            rb.linearVelocity = vliegRichting * pijlSnelheid;
+
+            rb.linearVelocity = vliegRichting * playerData.bulletSpeed;
 
             if (vliegRichting != Vector3.zero)
             {
@@ -95,6 +97,19 @@ public class AkController : MonoBehaviour
                 transform.forward = kijkRichting;
             }
         }
+    }
+    private void DropAk()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (HasAk.hasAk)
+            {
+                HasAk.hasAk = false;
+                HasAk.ak.SetActive(false);
+               
+            }
+        }
+       
     }
 
 }

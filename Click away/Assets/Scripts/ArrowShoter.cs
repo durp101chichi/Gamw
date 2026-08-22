@@ -6,11 +6,12 @@ public class ArrowShoter : MonoBehaviour
 {
     public GameObject pijlPrefab;    //arrowprefab
     public Transform schietPunt;     //shootpoint
-    public float pijlSnelheid = 20f;
+   [SerializeField] PlayerData playerData;
     [SerializeField] int ammountOfShoot;
     [SerializeField] TextMeshProUGUI arrowCounter;
     [SerializeField] AkController akController;
     [SerializeField] HasAk hasAk;
+    [SerializeField] ArrowDamage arrowSpeed;
     
     [Header("Scroll Instellingen")]
 
@@ -26,6 +27,7 @@ public class ArrowShoter : MonoBehaviour
     }
     void Update()
     {
+        
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0f)
         {
@@ -40,6 +42,12 @@ public class ArrowShoter : MonoBehaviour
                     SchietPijlNaarMuis();
                     ammountOfShoot--;
                     arrowCounter.text = $"{ammountOfShoot}";
+                    arrowSpeed.Tier1();
+                    arrowSpeed.Tier2();
+                    arrowSpeed.Tier3();
+                    arrowSpeed.Tier4();
+                    arrowSpeed.Tier5();
+                 
                 }
             
             
@@ -49,12 +57,12 @@ public class ArrowShoter : MonoBehaviour
     void PasSnelheidAan(float scrollRichting)
     {
        
-        pijlSnelheid += scrollRichting * scrollGevoeligheid;
+        playerData.ArrowSpeed += scrollRichting * scrollGevoeligheid;
 
         
-        pijlSnelheid = Mathf.Clamp(pijlSnelheid, minimaleSnelheid, maximaleSnelheid);
+        playerData.ArrowSpeed = Mathf.Clamp(playerData.ArrowSpeed, minimaleSnelheid, maximaleSnelheid);
 
-        Debug.Log("Huidige pijlsnelheid ingesteld op: " + pijlSnelheid);
+       // Debug.Log("Huidige pijlsnelheid ingesteld op: " + pijlSnelheid);
     }
     void SchietPijlNaarMuis()
     {
@@ -83,12 +91,28 @@ public class ArrowShoter : MonoBehaviour
             }
 
            
-            rb.linearVelocity = vliegRichting * pijlSnelheid;
+            rb.linearVelocity = vliegRichting * playerData.ArrowSpeed;
 
             if (vliegRichting != Vector3.zero)
             {
                 nieuwePijl.transform.forward = vliegRichting;
+                SpeedDrop();
             }
         }
     }
+    private void SpeedDrop()
+    {
+        if (playerData.ArrowSpeed > 10)
+        {
+         //   while (playerData.ArrowSpeed == minimaleSnelheid)
+            {
+           //     playerData.ArrowSpeed--;
+            }
+            playerData.ArrowSpeed -= 5;
+        }
+        
+
+
+    }
+
 }

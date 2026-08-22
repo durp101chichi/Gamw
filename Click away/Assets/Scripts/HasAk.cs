@@ -4,7 +4,7 @@ public class HasAk : MonoBehaviour
 {
     public bool hasAk = false;
     [SerializeField] GameObject akImage;
-    [SerializeField] GameObject ak;
+    [SerializeField] public GameObject ak;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
