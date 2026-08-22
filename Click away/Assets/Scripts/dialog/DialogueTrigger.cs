@@ -11,8 +11,10 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private Animator emoteAnimator;
 
     [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
+    [SerializeField] private TextAsset[] inkJSON;
+    private int dialogsCount = 0;
 
+    private static DialogueTrigger instance;
     private bool playerInRange;
 
     private void Awake()
@@ -28,7 +30,7 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                DialogueManager.GetInstance().EnterDialogueMode(inkJSON, emoteAnimator);
+                DialogueManager.GetInstance().EnterDialogueMode(inkJSON[dialogsCount], emoteAnimator);
             }
         }
         else
@@ -51,5 +53,19 @@ public class DialogueTrigger : MonoBehaviour
         {
             playerInRange = false;
         }
+    }
+
+    public void Continue()
+    { 
+        dialogsCount++;
+        if (dialogsCount >= inkJSON.Length)
+        {
+            Debug.LogWarning("DialogueTrigger: Continue() called, but no more dialogues are available.");
+            Destroy(gameObject);
+        }
+    }
+    public static DialogueTrigger GetInstance()
+    {
+        return instance;
     }
 }

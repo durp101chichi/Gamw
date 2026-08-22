@@ -401,6 +401,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b07b8218a97e043419ff653a1b0d4065, type: 3}
+--- !u!114 &2002076589598093084 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1805353375511227240, guid: b07b8218a97e043419ff653a1b0d4065, type: 3}
+  m_PrefabInstance: {fileID: 199611222620406900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56bc482903bda04c907c4efb5ceb115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
 --- !u!4 &8477180134373659733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8602393375136518177, guid: b07b8218a97e043419ff653a1b0d4065, type: 3}
@@ -790,6 +801,10 @@ PrefabInstance:
       propertyPath: dialoguePanel
       value: 
       objectReference: {fileID: 1419876212438198962}
+    - target: {fileID: 7501389235220128385, guid: 9262986000a854547b8218eaed1d4923, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 2002076589598093084}
     - target: {fileID: 7501389235220128385, guid: 9262986000a854547b8218eaed1d4923, type: 3}
       propertyPath: displayNameText
       value: 

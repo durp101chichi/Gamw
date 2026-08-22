@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Load Globals JSON")]
     [SerializeField] private TextAsset loadGlobalsJSON;
+    [SerializeField] private DialogueTrigger dialogueTrigger;
 
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -49,7 +50,6 @@ public class DialogueManager : MonoBehaviour
 
     private const string SPEAKER_TAG = "char";
     private const string PORTRAIT_TAG = "anim";
-    private const string LAYOUT_TAG = "layout";
     private const string AUDIO_TAG = "audio";
 
     private DialogueVariables dialogueVariables;
@@ -165,6 +165,8 @@ public class DialogueManager : MonoBehaviour
         dialogCamera.enabled = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        dialogueTrigger.Continue();
 
         if (sceneEnd >= 0)
         {
