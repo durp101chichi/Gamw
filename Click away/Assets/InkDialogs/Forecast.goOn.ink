@@ -1,1 +1,3 @@
-{~what do you want? just leave|I allready helped you|just go|stop starring, you have work to do|no} #char:Forecast #anim:forecast_norm
+INCLUDE AllVar.ink
+{~what do you want? just leave|I allready helped you|just go|stop starring, you have work to do|no} #char:Forecast #anim:forecast_norm #audio:forecast
+ ~ForecastLike--

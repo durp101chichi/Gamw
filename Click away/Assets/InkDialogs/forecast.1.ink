@@ -1,9 +1,10 @@
 VAR name = "???"
 VAR work = "???"
+INCLUDE AllVar.ink
 
 -> Begin
 === Begin
-grghhh #anim:forecast_drink #char:{name}
+grghhh #anim:forecast_drink #char:{name} #audio:forecast
  + [hello?] -> Start
  + [...] -> Begin
 
@@ -11,9 +12,9 @@ grghhh #anim:forecast_drink #char:{name}
 hm? #anim:forecast_drink #char:{name}
 who are you?
 
-Click #anim:click_confused #char:Click
+Click #anim:click_confused #char:Click #audio:main
 
-hmmmmmmm #anim:forecast_norm #char:{name}
+hmmmmmmm #anim:forecast_norm #char:{name} #audio:forecast
 so, you the guy for the job.. kind of.. small
  + [wha?] -> Continue
  + [and?] -> YouSure
@@ -24,21 +25,23 @@ I mean, you sure you can do it? it's a big boy job #anim:forecast_think #char:{n
  + [>:(] -> Angry
  
  === Angry
- How dare you.. #anim:click_confused #char:Click
+ ~ForecastLike--
+ How dare you.. #anim:click_confused #char:Click #audio:main
  ...
  Bet your drunk cloud would run to its mother board if you had to do it. #char:Click #anim:click_hah
- EH?!? #anim:forecast_wow #char:{name}
+ EH?!? #anim:forecast_wow #char:{name} #audio:forecast
  ..
  ...
  .....
  -> Continue
  
  === Help
- if you say so... #anim:forecast_norm #char:{name}
+  ~ForecastLike++
+ if you say so... #anim:forecast_norm #char:{name} #audio:forecast
  ->Continue
  
  === Continue
- ... #anim:forecast_norm #char:{name}
+ ... #anim:forecast_norm #char:{name} #audio:forecast
 welp, uh, here is your ticket, go, shoo #anim:forecast_think #char:{name}
 + [job?] -> Job
 + [okay] -> END
@@ -50,7 +53,8 @@ welp, uh, here is your ticket, go, shoo #anim:forecast_think #char:{name}
 my name is Forecast, I am your boss, so go work#anim:forecast_think #char:{name}
 { work == "work": -> Okay | -> answerJob}
 
-=== Job
+=== Job 
+~ForecastLike--
 ~work = "work"
 did you NOT read the job description and just TOOK IT? #anim:forecast_wow #char:{name}
 the economy isn't THAT BAD

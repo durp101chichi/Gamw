@@ -49,6 +49,7 @@ MonoBehaviour:
   typingSpeed: 0.04
   sceneEnd: 2
   loadGlobalsJSON: {fileID: 4900000, guid: 95382ad5a41cb804fbcd6a4aa6bdc4af, type: 3}
+  dialogueTrigger: {fileID: 0}
   dialoguePanel: {fileID: 0}
   dialogueText: {fileID: 0}
   displayNameText: {fileID: 0}
@@ -60,7 +61,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   defaultAudioInfo: {fileID: 11400000, guid: dc056b3c7fae8fa4e85ea6ec8ce00db0, type: 2}
-  audioInfos: []
+  audioInfos:
+  - {fileID: 11400000, guid: 96c0c551424e06d40aa5d02f9937c107, type: 2}
+  - {fileID: 11400000, guid: ead6b76646ef2814d867ba8b77fb0680, type: 2}
+  - {fileID: 11400000, guid: dc056b3c7fae8fa4e85ea6ec8ce00db0, type: 2}
+  - {fileID: 11400000, guid: 7aeed8f69af6cf34f91efbd7fcd35778, type: 2}
   makePredictable: 0
 --- !u!114 &5067850808963041908
 MonoBehaviour:
