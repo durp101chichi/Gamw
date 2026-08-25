@@ -11,6 +11,7 @@ public class AkController : MonoBehaviour
     [SerializeField] TextMeshProUGUI bulletcounter;
     [SerializeField] HasAk HasAk;
     [SerializeField] PlayerData playerData;
+    [SerializeField] PauseMenuActivate menuActivate;
 
 
     private void Start()
@@ -26,15 +27,20 @@ public class AkController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (HasAk.hasAk)
+           // if (menuActivate.isPaused == false) 
             {
-                if (ammo > 0)
+                if (HasAk.hasAk)
                 {
-                    SchietPijlNaarMuis();
-                    ammo--;
-                    bulletcounter.text = $"{ammo}";
+                    if (ammo > 0)
+                    {
+                        SchietPijlNaarMuis();
+                        ammo--;
+                        bulletcounter.text = $"{ammo}";
+                    }
                 }
             }
+                 
+            
         }
     }
 

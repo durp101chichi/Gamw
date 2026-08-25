@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802fe1f6382ac024ebf73921807bc691, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  <money>k__BackingField: 0
+  <money>k__BackingField: 400
+  <bulletSpeed>k__BackingField: 100
+  <ArrowSpeed>k__BackingField: 13.500013
+  <arrowCurrentDamage>k__BackingField: 5

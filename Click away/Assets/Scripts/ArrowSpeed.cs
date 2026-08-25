@@ -7,7 +7,7 @@ public class ArrowDamage : MonoBehaviour
     [SerializeField] PlayerData playerData;
     private void Start()
     {
-        playerData.ArrowSpeed = 10;
+        playerData.ArrowSpeed = 20f;
     }
     public void Tier1()
     {

@@ -6,6 +6,7 @@ public class PlayerData : ScriptableObject
 {
      [field:SerializeField]  public float money { get; set; }
     [field:SerializeField] public float bulletSpeed { get;set; }
+    [field:SerializeField] public float bulletDamage { get; set; }
     [field:SerializeField]  public float ArrowSpeed { get; set; }
     [field: SerializeField] public float arrowCurrentDamage { get; set; }
 

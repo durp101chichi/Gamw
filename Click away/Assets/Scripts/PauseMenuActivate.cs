@@ -4,6 +4,7 @@ public class PauseMenuActivate : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject inventory;
+    public bool isPaused = false;
 
 
     void Start()
@@ -16,12 +17,13 @@ public class PauseMenuActivate : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu.SetActive(!pauseMenu.activeSelf);
+            pauseMenu.SetActive(!pauseMenu.activeSelf);          
         }
-
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             inventory.SetActive(!inventory.activeSelf);
         }
+        
+        
     }
 }

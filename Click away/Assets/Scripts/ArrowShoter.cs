@@ -12,11 +12,12 @@ public class ArrowShoter : MonoBehaviour
     [SerializeField] AkController akController;
     [SerializeField] HasAk hasAk;
     [SerializeField] ArrowDamage arrowSpeed;
+    [SerializeField] PauseMenuActivate pauseMenuActivate;
     
     [Header("Scroll Instellingen")]
 
     public float scrollGevoeligheid = 1f; //scroolsens
-    public float minimaleSnelheid = 10f;   //minspeed
+    public float minimaleSnelheid = 0f;  //minspeed
     public float maximaleSnelheid = 60f; //maxspeed
 
     private void Start()
@@ -35,8 +36,8 @@ public class ArrowShoter : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !hasAk.hasAk)
         {
-            
-            
+          //  if (pauseMenuActivate.isPaused == false)
+            {
                 if (ammountOfShoot > 0)
                 {
                     SchietPijlNaarMuis();
@@ -47,10 +48,9 @@ public class ArrowShoter : MonoBehaviour
                     arrowSpeed.Tier3();
                     arrowSpeed.Tier4();
                     arrowSpeed.Tier5();
-                 
+
                 }
-            
-            
+            } 
             
         }
     }
@@ -102,13 +102,14 @@ public class ArrowShoter : MonoBehaviour
     }
     private void SpeedDrop()
     {
-        if (playerData.ArrowSpeed > 10)
+        if (playerData.ArrowSpeed > 0)
         {
          //   while (playerData.ArrowSpeed == minimaleSnelheid)
             {
            //     playerData.ArrowSpeed--;
             }
             playerData.ArrowSpeed -= 5;
+            
         }
         
 
