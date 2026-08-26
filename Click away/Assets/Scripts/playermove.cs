@@ -30,10 +30,10 @@ public class Playermove : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontal, 0f, vetical);
 
-        if (dialogueManager.dialogueIsPlaying)
-            rb.linearVelocity = Vector3.zero;
-        else 
-            rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
+      //  if (dialogueManager.dialogueIsPlaying)
+         //   rb.linearVelocity = Vector3.zero;
+    //    else 
+         //   rb.linearVelocity = new Vector3(movement.x * speed, rb.linearVelocity.y, movement.z * speed);
 
 
 
