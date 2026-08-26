@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7cecd8e55a4b443a57341fe3a95c9c, type: 3}
   m_Name: ClickAudio
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAudioInfoSO
-  id: 
+  id: main
   dialogueTypingSoundClips:
   - {fileID: 8300000, guid: 413cf996fc1c1524cb2d5efd2b7945bd, type: 3}
   - {fileID: 8300000, guid: 4bffb8f8843aeb74db43b3427c7bdfdc, type: 3}
-  frequencyLevel: 2
-  minPitch: 0.5
-  maxPitch: 3
+  frequencyLevel: 3
+  minPitch: 2
+  maxPitch: 2.62
   stopAudioSource: 0

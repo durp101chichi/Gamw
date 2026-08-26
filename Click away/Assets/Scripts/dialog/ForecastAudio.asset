@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7cecd8e55a4b443a57341fe3a95c9c, type: 3}
   m_Name: ForecastAudio
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAudioInfoSO
-  id: 1
+  id: forecast
   dialogueTypingSoundClips:
   - {fileID: 8300000, guid: 6a7a0a851f7d69641bd40dd38164a919, type: 3}
   - {fileID: 8300000, guid: 9d1cf05f9a22d2b4487c7b38ee26ce8a, type: 3}
   frequencyLevel: 2
-  minPitch: 0.5
+  minPitch: 1
   maxPitch: 3
-  stopAudioSource: 0
+  stopAudioSource: 1

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7cecd8e55a4b443a57341fe3a95c9c, type: 3}
   m_Name: TweetyAudio
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAudioInfoSO
-  id: 
+  id: bird
   dialogueTypingSoundClips:
   - {fileID: 8300000, guid: 853e1e89838cda34b9a219c0dbb69541, type: 3}
   - {fileID: 8300000, guid: 7e770cc43c9202f44a6d8e1470611935, type: 3}
-  frequencyLevel: 2
+  frequencyLevel: 1
   minPitch: 0.5
-  maxPitch: 3
-  stopAudioSource: 0
+  maxPitch: 0.75
+  stopAudioSource: 1

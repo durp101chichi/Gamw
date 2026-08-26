@@ -1878,6 +1878,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 45890929433577170, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
+      propertyPath: typingSpeed
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 45890929433577170, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
+      propertyPath: audioInfos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 45890929433577170, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
+      propertyPath: 'audioInfos.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7aeed8f69af6cf34f91efbd7fcd35778, type: 2}
+    - target: {fileID: 45890929433577170, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
+      propertyPath: 'audioInfos.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: dc056b3c7fae8fa4e85ea6ec8ce00db0, type: 2}
     - target: {fileID: 188203071730655791, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

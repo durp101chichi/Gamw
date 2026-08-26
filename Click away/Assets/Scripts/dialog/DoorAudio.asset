@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c7cecd8e55a4b443a57341fe3a95c9c, type: 3}
   m_Name: DoorAudio
   m_EditorClassIdentifier: Assembly-CSharp::DialogueAudioInfoSO
-  id: 
+  id: door
   dialogueTypingSoundClips:
-  - {fileID: 8300000, guid: faa5a18f600b8d542a0436a22efdea96, type: 3}
   - {fileID: 8300000, guid: e6cae0132f60ab24c912f7bea01681be, type: 3}
-  frequencyLevel: 2
-  minPitch: 0.5
+  - {fileID: 8300000, guid: faa5a18f600b8d542a0436a22efdea96, type: 3}
+  frequencyLevel: 1
+  minPitch: 2.82
   maxPitch: 3
-  stopAudioSource: 0
+  stopAudioSource: 1

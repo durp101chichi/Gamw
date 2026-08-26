@@ -1,6 +1,6 @@
+INCLUDE AllVar.ink
 VAR name = "???"
 VAR work = "???"
-INCLUDE AllVar.ink
 
 -> Begin
 === Begin

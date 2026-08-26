@@ -2443,6 +2443,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7501389235220128385, guid: 9262986000a854547b8218eaed1d4923, type: 3}
+      propertyPath: sceneEnd
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501389235220128385, guid: 9262986000a854547b8218eaed1d4923, type: 3}
       propertyPath: dialogCamera
       value: 
       objectReference: {fileID: 359567120}

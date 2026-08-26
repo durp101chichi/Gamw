@@ -44,6 +44,8 @@ public class DialogueManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private bool canContinueToNextLine = false;
+    private bool tiping = false;
+    private bool stopAudioSource = true;
 
     private Coroutine displayLineCoroutine;
 
@@ -158,6 +160,7 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
+        
 
         dialogueVariables.StopListening(currentStory);
         inkExternalFunctions.Unbind(currentStory);
@@ -176,6 +179,7 @@ public class DialogueManager : MonoBehaviour
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
+        if (stopAudioSource) audioSource.Stop();
     }
 
     private void ContinueStory()
@@ -191,6 +195,7 @@ public class DialogueManager : MonoBehaviour
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
             {
+                tiping = false;
                 StartCoroutine(ExitDialogueMode());
             }
             // otherwise, handle the normal case for continuing the story
@@ -209,6 +214,8 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine(string line)
     {
+        
+        tiping = false;
         // set the text to the full line, but set the visible characters to 0
         dialogueText.text = line;
         dialogueText.maxVisibleCharacters = 0;
@@ -221,13 +228,6 @@ public class DialogueManager : MonoBehaviour
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
         {
-            // if the submit button is pressed, finish up displaying the line right away
-            if (UnityEngine.Input.GetMouseButtonDown(0))
-            {
-                dialogueText.maxVisibleCharacters = line.Length;
-                break;
-            }
-
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag)
             {
@@ -240,10 +240,21 @@ public class DialogueManager : MonoBehaviour
             // if not rich text, add the next letter and wait a small time
             else
             {
+                tiping = true;
                 PlayDialogueSound(dialogueText.maxVisibleCharacters, dialogueText.text[dialogueText.maxVisibleCharacters]);
                 dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
             }
+
+            // if the submit button is pressed, finish up displaying the line right away
+            if (UnityEngine.Input.GetMouseButtonDown(0) && tiping)
+            {
+                dialogueText.maxVisibleCharacters = line.Length;
+                tiping = false;
+                if (stopAudioSource) audioSource.Stop();
+                break;
+            }
+            if (stopAudioSource) audioSource.Stop();
         }
 
         // actions to take after the entire line has finished displaying
@@ -259,7 +270,7 @@ public class DialogueManager : MonoBehaviour
         int frequencyLevel = currentAudioInfo.frequencyLevel;
         float minPitch = currentAudioInfo.minPitch;
         float maxPitch = currentAudioInfo.maxPitch;
-        bool stopAudioSource = currentAudioInfo.stopAudioSource;
+        stopAudioSource = currentAudioInfo.stopAudioSource;
 
         // play the sound based on the config
         if (currentDisplayedCharacterCount % frequencyLevel == 0)

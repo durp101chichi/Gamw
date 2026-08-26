@@ -1220,6 +1220,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8433844863904048524, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
+      propertyPath: m_Pitch
+      value: -1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 8477180134373659733, guid: 1e5423a4f58c2224f84e54986c7309de, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.32
@@ -1842,7 +1846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EChangeScene
   SceneChange: {fileID: 1773397858}
-  Scene: 1
+  Scene: 3
   E: {fileID: 1743219156}
 --- !u!114 &1773397858 stripped
 MonoBehaviour:
