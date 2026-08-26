@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bar.unity
     guid: ad0bed711614fb74fa45478a5fc98713
+  - enabled: 1
+    path: Assets/Scenes/TrainStationMainBar.unity
+    guid: c782d5294e5670d4dad3608c93ddb90f
+  - enabled: 1
+    path: Assets/Scenes/Conspiracies/FirstConspiracy.unity
+    guid: 36059413baa37104481b4b4fbf664f04
+  - enabled: 1
+    path: Assets/Scenes/TrainStationMainTrain.unity
+    guid: 4290ac12fee99e34e9cf70301d36099b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -1,1 +1,73 @@
-{"inkVersion":21,"root":[[{"->":"Begin"},["done",{"#f":5,"#n":"g-0"}],null],"done",{"Begin":[["#","^char forecast","/#","#","^anim drink","/#","^mmmmm...","\n","ev","str","^hello?","/str","/ev",{"*":".^.c-0","flg":4},"ev","str","^Forecast?","/str","/ev",{"*":".^.c-1","flg":4},"ev","str","^...","/str","/ev",{"*":".^.c-2","flg":4},{"c-0":[{"->":"hello"},"\n",{"#f":5}],"c-1":["^ ",{"->":"hello"},"\n",{"#f":5}],"c-2":[{"->":"Begin"},"\n",{"#f":5}]}],{"#f":1}],"hello":[["#","^char forecast","/#","#","^anim sit","/#","^huh?","\n","#","^char forecast","/#","#","^anim drink","/#","^Oh! uuh, who are you?","\n","ev","str","^Click","/str","/ev",{"*":".^.c-0","flg":4},"ev","str","^...","/str","/ev",{"*":".^.c-1","flg":4},{"c-0":["^ ",{"->":"Answer"},"\n",{"#f":5}],"c-1":["^ ",{"->":"Silent"},"\n",{"#f":5}]}],{"#f":1}],"Answer":[["#","^char forecast","/#","#","^anim drink","/#","^ah...","\n","#","^char forecast","/#","#","^anim think","/#","^Ah!","\n","#","^char forecast","/#","#","^anim think","/#","^Give me a second...","\n","#","^char forecast","/#","#","^anim sit","/#","#","^inventory ticket","/#","^There it is! A consipiracy ticket","\n","#","^char forecast","/#","#","^anim sit","/#","^Go back to the train, and give this ticket to Tweety.","\n","ev","str","^okay","/str","/ev",{"*":".^.c-0","flg":4},"ev","str","^huh?","/str","/ev",{"*":".^.c-1","flg":4},"ev","str","^but then what?","/str","/ev",{"*":".^.c-2","flg":4},{"c-0":["^ ","end","\n",{"#f":5}],"c-1":["^ ",{"->":"Stupid"},"\n",{"#f":5}],"c-2":["^ ",{"->":"Explain"},"\n",{"#f":5}]}],{"#f":1}],"Silent":["#","^char forecast","/#","#","^anim drink","/#","#","^rep scilent","/#","^Are.. are you the new guy?","\n","#","^char click","/#","#","^anim stare","/#","^...","\n",{"->":"Answer"},{"#f":1}],"Stupid":["#","^char forecast","/#","#","^anim drink","/#","^stupid","\n",{"->":"Explain"},{"#f":1}],"Explain":[["#","^char forecast","/#","#","^anim drink","/#","^ugh","\n","#","^char forecast","/#","#","^anim sit","/#","^I thought you read the document when signing","\n","ev","str","^uh","/str","/ev",{"*":".^.c-0","flg":4},"ev","str","^I did","/str","/ev",{"*":".^.c-1","flg":4},{"c-0":["^ ",{"->":"tell"},"\n",{"#f":5}],"c-1":["^ ",{"->":"tell"},"\n",{"#f":5}]}],{"#f":1}],"tell":[["#","^char forecast","/#","#","^anim sit","/#","^mhm..","\n","#","^char forecast","/#","#","^anim think","/#","^Well, you have been given a ticket. Tweety will get you to an internet space that contains a certain group of people called a consipiracy. Your job is to decide wich of those people are bad.","\n","#","^char forecast","/#","#","^anim sit","/#","^No matter how bad the person is.","\n","#","^char forecast","/#","#","^anim think","/#","^People upstairs will decide their punishment acordingly, don't worry about it.","\n","ev","str","^ok","/str","/ev",{"*":".^.c-0","flg":4},"ev","str","^...","/str","/ev",{"*":".^.c-1","flg":4},{"c-0":["^ ",{"->":"leave"},"\n",{"#f":5}],"c-1":["^ ",{"->":"uh"},"\n",{"#f":5}]}],{"#f":1}],"uh":["#","^char click","/#","#","^anim stare","/#","^...","\n","#","^char forecast","/#","#","^anim drink","/#","#","^rep scilent","/#","^...","\n",{"->":"leave"},{"#f":1}],"leave":["#","^char forecast","/#","#","^anim sit","/#","^go","\n","end",{"#f":1}],"#f":1}],"listDefs":{}}
+INCLUDE AllVar.ink
+VAR name = "???"
+VAR work = "???"
+
+-> Begin
+=== Begin
+grghhh #anim:forecast_drink #char:{name} #audio:forecast
+ + [hello?] -> Start
+ + [...] -> Begin
+
+=== Start
+hm? #anim:forecast_drink #char:{name}
+who are you?
+
+Click #anim:click_confused #char:Click #audio:main
+
+hmmmmmmm #anim:forecast_norm #char:{name} #audio:forecast
+so, you the guy for the job.. kind of.. small
+ + [wha?] -> Continue
+ + [and?] -> YouSure
+=== YouSure
+I mean, you sure you can do it? it's a big boy job #anim:forecast_think #char:{name}
+ + [and?] -> Continue
+ + [yes] -> Help
+ + [>:(] -> Angry
+ 
+ === Angry
+ ~ForecastLike--
+ How dare you.. #anim:click_confused #char:Click #audio:main
+ ...
+ Bet your drunk cloud would run to its mother board if you had to do it. #char:Click #anim:click_hah
+ EH?!? #anim:forecast_wow #char:{name} #audio:forecast
+ ..
+ ...
+ .....
+ -> Continue
+ 
+ === Help
+  ~ForecastLike++
+ if you say so... #anim:forecast_norm #char:{name} #audio:forecast
+ ->Continue
+ 
+ === Continue
+ ... #anim:forecast_norm #char:{name} #audio:forecast
+welp, uh, here is your ticket, go, shoo #anim:forecast_think #char:{name}
++ [job?] -> Job
++ [okay] -> END
++ [wha?] -> Job
++ [who r u?] -> Work
+
+=== Work
+~name = "Forecast"
+my name is Forecast, I am your boss, so go work#anim:forecast_think #char:{name}
+{ work == "work": -> Okay | -> answerJob}
+
+=== Job 
+~ForecastLike--
+~work = "work"
+did you NOT read the job description and just TOOK IT? #anim:forecast_wow #char:{name}
+the economy isn't THAT BAD
+eh, worse for you#anim:forecast_think #char:{name}
+you'r job is simple, head over to the train station and give your ticket to the blue bird man
+he will get you to a shared space of the conspiracy, there, collect info on the people connected to the reported problem
+{ name == "Forecast": -> Okay | -> answerName}
+
+=== answerJob
++ [job?] -> Job
++ [okay] -> END
+=== answerName
++ [who r u?] -> Work
++ [okay] -> END
+=== Okay
++ [okay] -> END
