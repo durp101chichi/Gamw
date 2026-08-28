@@ -313,6 +313,7 @@ namespace Ink.UnityIntegration {
 					if(output.type == ErrorType.Error) {
 						inkFile.errors.Add(output);
 						Debug.LogError("Ink "+output.type+" for "+Path.GetFileName(inkFile.filePath)+": "+output.content + " (at "+output.relativeFilePath+":"+output.lineNumber+")", inkFile.inkAsset);
+						Debug.LogError("Ink "+output.type+" for "+Path.GetFileName(inkFile.filePath)+": "+output.content + " (at "+output.relativeFilePath+":"+output.lineNumber+")", inkFile.inkAsset);
 					} else if (output.type == ErrorType.Warning) {
 						inkFile.warnings.Add(output);
 						Debug.LogWarning("Ink "+output.type+" for "+Path.GetFileName(inkFile.filePath)+": "+output.content + " (at "+output.relativeFilePath+" "+output.lineNumber+")", inkFile.inkAsset);
