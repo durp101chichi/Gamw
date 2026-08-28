@@ -7,7 +7,12 @@ TagManager:
   - Ground
   - Enemy
   - Trader
+<<<<<<< HEAD
   - Wall
+=======
+  - FxTemporaire
+  - ak
+>>>>>>> Weapon
   layers:
   - Default
   - TransparentFX
