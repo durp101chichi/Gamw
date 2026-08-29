@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
     }
     private void MoneyCounter()
     {
-        moneyCounterText.text = $"{playerData.money} $";
+        //moneyCounterText.text = $"{playerData.money} $";
     }
     private void moneyLimit()
     {

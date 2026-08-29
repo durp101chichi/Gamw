@@ -48,7 +48,7 @@ public class ArrowShoter : MonoBehaviour
                     arrowSpeed.Tier3();
                     arrowSpeed.Tier4();
                     arrowSpeed.Tier5();
-
+                    SpeedDrop();
                 }
             } 
             
@@ -66,37 +66,39 @@ public class ArrowShoter : MonoBehaviour
     }
     void SchietPijlNaarMuis()
     {
+        // 1. Bereken de muispositie in de wereld
+        Plane speelvlak = new Plane(-Camera.main.transform.forward, schietPunt.position);
+        Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        GameObject nieuwePijl = Instantiate(pijlPrefab, schietPunt.position, schietPunt.rotation);
-        Rigidbody rb = nieuwePijl.GetComponent<Rigidbody>();
-
-        if (rb != null)
+        if (speelvlak.Raycast(straal, out float afstand))
         {
-           
-            Plane speelvlak = new Plane(Vector3.forward, schietPunt.position);
-            Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 muisPositie = straal.GetPoint(afstand);
 
-            Vector3 vliegRichting = transform.forward;
-            float afstand;
+            // 2. Bepaal de richting van schietPunt naar muis (alleen X en Y)
+            Vector3 richtingsVector = muisPositie - schietPunt.position;
+            richtingsVector.z = 0f;
 
-            // 2. Bepaal waar de muis het 2D-vlak snijdt
-            if (speelvlak.Raycast(straal, out afstand))
+            if (richtingsVector == Vector3.zero) return;
+
+            // 3. Bereken de exacte rotatie die naar de muis wijst
+            Quaternion pijlRotatie = Quaternion.LookRotation(richtingsVector, Vector3.up);
+
+            // 4. Instantiate met de BEREKENDE rotatie (niet schietPunt.rotation!)
+            GameObject nieuwePijl = Instantiate(pijlPrefab, schietPunt.position, pijlRotatie);
+
+            // 5. Negeer botsing tussen pijl en speler direct bij de start
+            Collider pijlCol = nieuwePijl.GetComponent<Collider>();
+            Collider spelerCol = GetComponent<Collider>();
+            if (pijlCol != null && spelerCol != null)
             {
-                Vector3 muisOpVlak = straal.GetPoint(afstand);
-
-                
-                vliegRichting = muisOpVlak - schietPunt.position;
-                vliegRichting.z = 0f; 
-                vliegRichting.Normalize(); 
+                Physics.IgnoreCollision(pijlCol, spelerCol);
             }
 
-           
-            rb.linearVelocity = vliegRichting * playerData.ArrowSpeed;
-
-            if (vliegRichting != Vector3.zero)
+            // 6. Geef snelheid in de berekende richting
+            Rigidbody rb = nieuwePijl.GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                nieuwePijl.transform.forward = vliegRichting;
-                SpeedDrop();
+                rb.linearVelocity = richtingsVector.normalized * playerData.ArrowSpeed;
             }
         }
     }
