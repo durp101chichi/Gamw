@@ -15,6 +15,7 @@ public class ArrowShoter : MonoBehaviour
     [SerializeField] HasAk hasAk;
     [SerializeField] ArrowDamage arrowSpeed;
     [SerializeField] PauseMenuActivate pauseMenuActivate;
+    [SerializeField] public bool canShoot = true;
     
     [Header("Scroll Instellingen")]
 
@@ -38,7 +39,7 @@ public class ArrowShoter : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !hasAk.hasAk)
         {
-          //  if (pauseMenuActivate.isPaused == false)
+            if (canShoot) 
             {
                 if (ammountOfShoot > 0)
                 {
