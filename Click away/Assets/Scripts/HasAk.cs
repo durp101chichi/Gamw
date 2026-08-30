@@ -1,17 +1,23 @@
 using UnityEngine;
-
-public class HasAk : MonoBehaviour
+using System.IO;
+using System.Collections;
+namespace ak
 {
-    public bool hasAk = false;
-    [SerializeField] GameObject akImage;
-    [SerializeField] public GameObject ak;
-    private void OnTriggerEnter(Collider other)
+    public class HasAk : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        public bool hsAk = false;
+        [SerializeField] GameObject Image;
+        [SerializeField] public GameObject ak1;
+        private void OnTriggerEnter(Collider other)
         {
-            hasAk = true;
-            ak.SetActive(true);
-            akImage.SetActive(true);
+            if (other.CompareTag("Player"))
+            {
+                hsAk = true;
+                Image.SetActive(true);
+                ak1.SetActive(true);
+            }
         }
     }
 }
+
+
