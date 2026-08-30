@@ -12,7 +12,8 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float typingSpeed = 0.04f;
-    [SerializeField] private int sceneEnd; 
+    [SerializeField] private int sceneEnd;
+    [SerializeField] private GameObject effects;
 
     [Header("Load Globals JSON")]
     [SerializeField] private TextAsset loadGlobalsJSON;
@@ -60,6 +61,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
+        effects.SetActive(false);
         if (instance != null)
         {
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
@@ -175,6 +177,7 @@ public class DialogueManager : MonoBehaviour
         if (sceneEnd >= 0)
         {
             sceneChange.ChangeScene(sceneEnd);
+            effects.SetActive(true);
         }
 
         // go back to default audio

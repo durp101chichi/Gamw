@@ -4,6 +4,7 @@ VAR work = "???"
 
 -> Begin
 === Begin
+~name = "???"
 grghhh #anim:forecast_drink #char:{name} #audio:forecast
  + [hello?] -> Start
  + [...] -> Begin

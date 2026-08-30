@@ -2,6 +2,7 @@ VAR name = "Conductor"
 INCLUDE AllVar.ink
 -> Begin
 === Begin
+~ name = "Conductor"
 ALL ABOARD!! #anim:tweety_happy #char:{name} #audio:bird
 TRAIN IS LEAVING IN 5 MINUTES!!!
 + [hi]-> ticket
