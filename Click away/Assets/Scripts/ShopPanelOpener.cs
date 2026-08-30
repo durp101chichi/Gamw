@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopPanelOpener : MonoBehaviour
@@ -6,6 +7,8 @@ public class ShopPanelOpener : MonoBehaviour
     [SerializeField] GameObject shopPanel;
     [SerializeField] ShopTextAnimator shopTextAnimator;
     [SerializeField] PlayerDamage playerDamage;
+    [SerializeField] AkController AkController;
+    [SerializeField] ArrowShoter arrowShoter;
 
    private bool inRange = false;
     void Start()
@@ -16,17 +19,18 @@ public class ShopPanelOpener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inRange && Input.GetKeyDown(KeyCode.E))
+        if (inRange && Input.GetKeyDown(KeyCode.E) && AkController.canFire)
         {
             shopTextAnimator.isAnimating = true;
           //  playerDamage.hpText.text = $"";
             shopPanel.SetActive(true);
             askPanel.SetActive(false);
-            
+            AkController.canFire = false;
+            arrowShoter.canShoot = false;
         }
         else
         {
-           
+            
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -43,6 +47,8 @@ public class ShopPanelOpener : MonoBehaviour
        // playerDamage.hpText.text = $" {playerDamage.hp}";
         askPanel.SetActive(false);
         shopPanel.SetActive(false );
+        AkController.canFire = true;
+        arrowShoter.canShoot = true;
     }
     public void ExitButton()
     {

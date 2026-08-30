@@ -6,7 +6,7 @@ using UnityEngine;
 public class MoneyController : MonoBehaviour
 {
     [SerializeField] float rotationSpeed;
-    [SerializeField] PlayerData playerData;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,7 +29,7 @@ public class MoneyController : MonoBehaviour
     {
        if (other.CompareTag("Player"))
         {
-            playerData.money += 100;
+           
             Debug.Log("money");
             gameObject.SetActive(false);
         }
