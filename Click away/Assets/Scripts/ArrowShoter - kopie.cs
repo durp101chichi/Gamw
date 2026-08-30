@@ -6,8 +6,10 @@ public class ArrowShoter : MonoBehaviour
 {
     public GameObject pijlPrefab;    //arrowprefab
     public Transform schietPunt;     //shootpoint
-   [SerializeField] PlayerData playerData;
+    [SerializeField] PlayerData PlayerData;
+    
     [SerializeField] int ammountOfShoot;
+    public float arrowspeed;
     [SerializeField] TextMeshProUGUI arrowCounter;
     [SerializeField] AkController akController;
     [SerializeField] HasAk hasAk;
@@ -57,60 +59,48 @@ public class ArrowShoter : MonoBehaviour
     void PasSnelheidAan(float scrollRichting)
     {
        
-        playerData.ArrowSpeed += scrollRichting * scrollGevoeligheid;
+        PlayerData.ArrowSpeed += scrollRichting * scrollGevoeligheid;
 
         
-        playerData.ArrowSpeed = Mathf.Clamp(playerData.ArrowSpeed, minimaleSnelheid, maximaleSnelheid);
+        PlayerData.ArrowSpeed = Mathf.Clamp(PlayerData.ArrowSpeed, minimaleSnelheid, maximaleSnelheid);
 
-       // Debug.Log("Huidige pijlsnelheid ingesteld op: " + pijlSnelheid);
+       
     }
     void SchietPijlNaarMuis()
     {
-        // 1. Bereken de muispositie in de wereld
+       
         Plane speelvlak = new Plane(-Camera.main.transform.forward, schietPunt.position);
         Ray straal = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (speelvlak.Raycast(straal, out float afstand))
         {
             Vector3 muisPositie = straal.GetPoint(afstand);
-
-            // 2. Bepaal de richting van schietPunt naar muis (alleen X en Y)
             Vector3 richtingsVector = muisPositie - schietPunt.position;
             richtingsVector.z = 0f;
-
             if (richtingsVector == Vector3.zero) return;
-
-            // 3. Bereken de exacte rotatie die naar de muis wijst
-            Quaternion pijlRotatie = Quaternion.LookRotation(richtingsVector, Vector3.up);
-
-            // 4. Instantiate met de BEREKENDE rotatie (niet schietPunt.rotation!)
+            Quaternion pijlRotatie = Quaternion.LookRotation(richtingsVector, Vector3.up);   
             GameObject nieuwePijl = Instantiate(pijlPrefab, schietPunt.position, pijlRotatie);
-
-            // 5. Negeer botsing tussen pijl en speler direct bij de start
-            Collider pijlCol = nieuwePijl.GetComponent<Collider>();
+           Collider pijlCol = nieuwePijl.GetComponent<Collider>();
             Collider spelerCol = GetComponent<Collider>();
             if (pijlCol != null && spelerCol != null)
             {
                 Physics.IgnoreCollision(pijlCol, spelerCol);
             }
-
-            // 6. Geef snelheid in de berekende richting
             Rigidbody rb = nieuwePijl.GetComponent<Rigidbody>();
-            if (rb != null)
+            rb.linearVelocity = richtingsVector.normalized * PlayerData.ArrowSpeed;
+            if (richtingsVector != Vector3.zero)
             {
-                rb.linearVelocity = richtingsVector.normalized * playerData.ArrowSpeed;
+                nieuwePijl.transform.forward = richtingsVector;
             }
         }
     }
     private void SpeedDrop()
     {
-        if (playerData.ArrowSpeed > 0)
+        if (PlayerData.ArrowSpeed > 0)
         {
-         //   while (playerData.ArrowSpeed == minimaleSnelheid)
-            {
-           //     playerData.ArrowSpeed--;
-            }
-            playerData.ArrowSpeed -= 5;
+         
+            
+            PlayerData.ArrowSpeed -= 5;
             
         }
         
