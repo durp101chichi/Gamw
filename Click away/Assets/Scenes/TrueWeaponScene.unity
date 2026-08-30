@@ -1072,10 +1072,24 @@ MonoBehaviour:
   schietPunt: {fileID: 179967389}
   smoke: {fileID: 2065766799}
   ammo: 120
-  bulletcounter: {fileID: 0}
+  bulletcounter: {fileID: 1446941804}
   HasAk: {fileID: 414946913}
-  playerData: {fileID: 11400000, guid: fae887ab2988c814b9e861f514848dd8, type: 2}
+  playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
   menuActivate: {fileID: 0}
+--- !u!114 &182525195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182525188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592b720ccdd07254aa45aa820dca4d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoneyController
+  rotationSpeed: 2
+  playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
 --- !u!1 &188948475
 GameObject:
   m_ObjectHideFlags: 0
@@ -13168,7 +13182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca063e7ad3b2d8f419576c65fc2dd454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  playerData: {fileID: 11400000, guid: fae887ab2988c814b9e861f514848dd8, type: 2}
+  playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
   moneyCounterText: {fileID: 1281570280}
 --- !u!114 &869282787
 MonoBehaviour:
@@ -13212,8 +13226,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ArrowShoter
   pijlPrefab: {fileID: 1225370512109555040, guid: cbc3e4e7ac66ec64390c6122adb2b2d7, type: 3}
   schietPunt: {fileID: 836389237}
-  playerData: {fileID: 11400000, guid: fae887ab2988c814b9e861f514848dd8, type: 2}
+  PlayerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
   ammountOfShoot: 20
+  arrowspeed: 0
   arrowCounter: {fileID: 176754800}
   akController: {fileID: 182525192}
   hasAk: {fileID: 414946913}
@@ -13879,6 +13894,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 182525192}
+    - targetCorrespondingSourceObject: {fileID: 1487774384131766, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 182525195}
   m_SourcePrefab: {fileID: 100100000, guid: ee329c3cd08e58645834d20702d7f6c6, type: 3}
 --- !u!1 &1072458064
 GameObject:
@@ -14174,18 +14192,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 45ef1708f3745d3448f8b0f74f4c0763, type: 3}
   m_PrefabInstance: {fileID: 1146238458}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1111107459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111107458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3fe728a336e884439b92822d99404da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LightAdder
 --- !u!114 &1111107460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14429,9 +14435,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 45ef1708f3745d3448f8b0f74f4c0763, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1111107460}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 45ef1708f3745d3448f8b0f74f4c0763, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1111107459}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 45ef1708f3745d3448f8b0f74f4c0763, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1111107464}
@@ -21510,7 +21513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e265d05720c954a844bb2a735b087b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowDamage
-  playerData: {fileID: 11400000, guid: fae887ab2988c814b9e861f514848dd8, type: 2}
+  _playerData: {fileID: 11400000, guid: 02fa6cf9e2c019546be6769ed46aaafd, type: 2}
 --- !u!1 &1590150879
 GameObject:
   m_ObjectHideFlags: 0

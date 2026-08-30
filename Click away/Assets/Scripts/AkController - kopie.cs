@@ -12,6 +12,7 @@ public class AkController : MonoBehaviour
     [SerializeField] HasAk HasAk;
     [SerializeField] PlayerData playerData;
     [SerializeField] PauseMenuActivate menuActivate;
+    [SerializeField] public bool canFire = true;
 
 
     private void Start()
@@ -31,12 +32,16 @@ public class AkController : MonoBehaviour
             {
                 if (HasAk.hasAk)
                 {
-                    if (ammo > 0)
+                    if (canFire)
                     {
-                        SchietPijlNaarMuis();
-                        ammo--;
-                        bulletcounter.text = $"{ammo}";
+                        if (ammo > 0)
+                        {
+                            SchietPijlNaarMuis();
+                            ammo--;
+                            bulletcounter.text = $"{ammo}";
+                        }
                     }
+                    
                 }
             }
                  

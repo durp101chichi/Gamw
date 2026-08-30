@@ -4,6 +4,7 @@ public class LightController : MonoBehaviour
 {
     [SerializeField] private Light Light;
     [SerializeField] private GameObject lighting;
+    [SerializeField] private HasLighter HasLighter;
     private bool isActive = true;
     void Start()
     {
@@ -22,7 +23,7 @@ public class LightController : MonoBehaviour
 
     private void lightOn()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && HasLighter.hasLigher == true)
         {
             
             if (isActive) 
